@@ -1,0 +1,17 @@
+Package: DEswan
+Title: DEswan : Differential Expression Sliding Window ANalaysis
+Version: 0.0.0.9001
+Authors@R: person("Benoit", "Lehallier", email = "benoit.lehallier@gmail.com", role = c("aut", "cre"))
+Description: Functions necessary to perform Differential Expression Sliding Window ANalaysis on high-dimensional data as described by Lehallier et al (in preparation). Includes functions for rudimentary data cleaning, blablabla. Also includes a number of utility functions for data manipulation and visualization.
+Imports:
+  car,
+  reshape,
+  gplots
+Depends: R (>= 3.4.1)
+License: GPL-3
+LazyData: true
+Encoding: UTF-8
+RoxygenNote: 6.1.0.9000
+Suggests: knitr,
+    rmarkdown
+VignetteBuilder: knitr
