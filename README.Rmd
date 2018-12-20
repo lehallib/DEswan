@@ -1,25 +1,36 @@
+---
+output: github_document
+---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-DEswan
-======
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "README-"
+)
+```
+
+# DEswan
 
 The goal of DEswan is to run a Differential Expression - Sliding Window ANalysis
 
-Installation
-------------
+## Installation
 
 You can install DEswan from github with:
 
-``` r
+```{r gh-installation, eval = FALSE}
 # install.packages("devtools")
 devtools::install_github("lehallib/DEswan")
 ```
 
-Vignette
---------
+## Vignette
 
-For examples of DEswan analysis [Vignette](#vignette) <http://www.vignette.com>
+For examples of DEswan analysis
+[Vignette] http://www.vignette.com
 
-``` r
+
+```{r example}
 ## basic example code
 ```
