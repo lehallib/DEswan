@@ -12,14 +12,16 @@ You can install DEswan from github with:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("lehallib/DEswan")
+devtools::install_github("lehallib/DEswan",build_vignettes = T)
+library("DEswan")
 ```
 
 Vignette
 --------
 
-For examples of DEswan analysis [Vignette](#vignette) <http://www.vignette.com>
+For examples of DEswan analysis
 
 ``` r
-## basic example code
+vignette("DEswan")
+#> starting httpd help server ... done
 ```
