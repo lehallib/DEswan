@@ -21,6 +21,7 @@
 #'                covariates = agingplasmaproteome[,c(2:3)])
 #' head(res.DEswan$p)
 #' head(res.DEswan$coeff)
+#' 
 DEswan=function(data.df, qt, window.center, buckets.size, covariates){
   
   if(missing(data.df)==T){
@@ -39,8 +40,10 @@ DEswan=function(data.df, qt, window.center, buckets.size, covariates){
   }
   if(missing(covariates)==T){
     covariates  <-  NULL
+  }else{
+    covariates <- data.frame(covariates)  
   }
-  
+
   
   pvalues.tot  <-  NULL
   coefficients.tot  <-  NULL

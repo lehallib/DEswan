@@ -11,7 +11,7 @@ Depends: R (>= 3.4.1)
 License: GPL-3
 LazyData: true
 Encoding: UTF-8
-RoxygenNote: 6.1.0.9000
+RoxygenNote: 6.1.1
 Suggests: knitr,
     rmarkdown
 VignetteBuilder: knitr

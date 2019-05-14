@@ -31,4 +31,5 @@ res.DEswan=DEswan(data.df = agingplasmaproteome[,-c(1:3)],
                covariates = agingplasmaproteome[,c(2:3)])
 head(res.DEswan$p)
 head(res.DEswan$coeff)
+
 }

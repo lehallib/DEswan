@@ -3,7 +3,7 @@
 DEswan
 ======
 
-The goal of DEswan is to run a Differential Expression - Sliding Window ANalysis
+Run a Differential Expression - Sliding Window ANalysis as described by Lehallier et al. (Submitted in Nature Med)
 
 Installation
 ------------
@@ -23,5 +23,5 @@ For examples of DEswan analysis
 
 ``` r
 vignette("DEswan")
-#> starting httpd help server ... done
+#> Warning: vignette 'DEswan' not found
 ```
