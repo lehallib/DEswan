@@ -26,7 +26,7 @@ nsignif.DEswan=function(res.DEswan.wide, thresholds){
   i=1
   for(i in 1:length(thresholds)){
     res.DEswan.wide.signif=rbind(res.DEswan.wide.signif,
-                                 apply(res.DEswan.wide[,-1],2,function(x) sum(x<thresholds[i])))
+                                 apply(res.DEswan.wide[,-1],2,function(x) sum(x<thresholds[i],na.rm = T)))
   }
   rownames(res.DEswan.wide.signif)=thresholds
   return(res.DEswan.wide.signif)

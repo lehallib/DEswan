@@ -43,7 +43,6 @@ DEswan=function(data.df, qt, window.center, buckets.size, covariates){
   }else{
     covariates <- data.frame(covariates)  
   }
-
   
   pvalues.tot  <-  NULL
   coefficients.tot  <-  NULL
@@ -67,7 +66,7 @@ DEswan=function(data.df, qt, window.center, buckets.size, covariates){
         deswan.formula  <-  paste(c("data.df[, i] ~ qt.tmp", paste("covariates$",colnames(covariates), collapse  =  " + ", sep = "")), collapse = " + ", sep = "")
       }
       test.glm  <-  NULL
-      test.glm  <- try(glm.fit  <-  glm(as.formula(deswan.formula), family  =  gaussian))
+      test.glm  <- try(glm.fit  <-  glm(as.formula(deswan.formula), family  =  gaussian), silent=TRUE)
       if(class(test.glm)[1] !=  "try-error"){
         glm.res  <-  car::Anova(glm.fit,  type  =  "2")
         pvalues  <-  rbind(pvalues, data.frame(variable  =  colnames(data.df)[i], window.center  =  window.center[k], factor  =  rownames(glm.res), pvalue=glm.res$`Pr(>Chisq)`, stringsAsFactors  =  F))
