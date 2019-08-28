@@ -13,7 +13,6 @@ You can install DEswan from github with:
 ``` r
 # install.packages("devtools")
 devtools::install_github("lehallib/DEswan",build_vignettes = T)
-library("DEswan")
 ```
 
 Vignette
@@ -22,6 +21,7 @@ Vignette
 For examples of DEswan analysis
 
 ``` r
+library("DEswan")
 vignette("DEswan")
 #> Warning: vignette 'DEswan' not found
 ```
