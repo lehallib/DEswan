@@ -38,7 +38,7 @@ DEswan=function(data.df, qt, window.center, buckets.size, covariates){
   if(missing(buckets.size)==T){
     buckets.size  <-  (max(range(qt))-min(range(qt)))/2
   }
-  if(missing(covariates)==T){
+  if(missing(covariates)==T | is.null(covariates)==T | is.na(covariates)==T){
     covariates  <-  NULL
   }else{
     covariates <- data.frame(covariates)  
