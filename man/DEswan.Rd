@@ -7,18 +7,18 @@
 DEswan(data.df, qt, window.center, buckets.size, covariates)
 }
 \arguments{
-\item{data.df:}{a data Frame - columns are variables and rows are samples. Same order as qt and covariates}
+\item{data.df:}{a data Frame - columns are variables and rows are samples (same order as qt and covariates)}
 
-\item{qt:}{a Vector - quantitative trait for DE-SWAN. Same order as data.df and covariates}
+\item{qt:}{a Vector - quantitative trait for DE-SWAN (same order as data.df and covariates)}
 
 \item{window.center:}{an optional Vector - window centers. Default is quantile(qt,  probs = seq(.1,.9,.1))}
 
-\item{buckets.size:}{an optional numeric - size of each bucket. Default is set to (max(range(qt))-min(range(qt)))/2}
+\item{buckets.size:}{an optional Numeric - size of each bucket. Default is set to (max(range(qt))-min(range(qt)))/2}
 
-\item{covariates:}{a Data Frame. Same order as qt and covariates}
+\item{covariates:}{a data Frame. Columns are variables and rows are samples (same order as qt and covariates)}
 }
 \value{
-list of 2 data.frames: $p  =  pvalues of qT and covariates for each variable and each window.center and $coefficients  =  coefficients of qT and covariates for each variable and each window.center
+list of 2 data Frames: $p  =  pvalues of qT and covariates for each variable and each window.center and $coefficients  =  coefficients of qT and covariates for each variable and each window.center
 }
 \description{
 Differential Expression - Sliding Window ANalysis (DE-SWAN)

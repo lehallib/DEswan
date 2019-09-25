@@ -8,15 +8,18 @@
 #' factor: an optional character string - qt or covariates in DEswan. Default is qt.
 #' @export
 #' @examples
-#' # list of factor
-#' unique(res.DEswan$p$factor)
-#' unique(res.DEswan$coeff$factor)
+#' res.DEswan=DEswan(data.df = agingplasmaproteome[,-c(1:3)],
+#' qt = agingplasmaproteome[,1],
+#' window.center = seq(40,100,10),
+#' buckets.size = 10,
+#' covariates = agingplasmaproteome[,c(2:3)])
+#' head(res.DEswan$p)
+#' head(res.DEswan$coeff)
 #' res.DEswan.wide.p=reshape.DEswan(res.DEswan)
 #' res.DEswan.wide.p=reshape.DEswan(res.DEswan,parameter = 1,factor = "qt")
+#' head(res.DEswan.wide.p)
 #' res.DEswan.wide.coeff=reshape.DEswan(res.DEswan,parameter = 2,factor = "qt")
-#' 
-#' 
-#' 
+#' head(res.DEswan.wide.coeff)
 
 reshape.DEswan=function(res.DEswan, parameter, factor){
   

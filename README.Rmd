@@ -12,9 +12,10 @@ knitr::opts_chunk$set(
 )
 ```
 
-# DEswan
+# DEswan package
 
-Run a Differential Expression - Sliding Window ANalysis as described by Lehallier et al. (Submitted in Nature Med)
+Run a Differential Expression - Sliding Window ANalysis (DEswan) as described by Lehallier et al. (https://www.biorxiv.org/content/10.1101/751115v1)
+
 
 ## Installation
 
@@ -25,10 +26,30 @@ You can install DEswan from github with:
 devtools::install_github("lehallib/DEswan",build_vignettes = T)
 ```
 
-## Vignette
 
-For examples of DEswan analysis
-```{r example}
-library("DEswan")
-vignette("DEswan")
-```
+# DEswan approach
+
+DEswan explore linear and non linear relationships between a quantitative trait (l) and one or more features.
+
+Considering a vector l of k unique values, we iteratively use l~k~ as the center of a window of size x and group samples in parcels below and above l~k~ 
+
+i.e. [l~k~-x/2 ; l~k~[ and ]l~k~ ; l~k~+x/2]
+
+To test for differential expression, we use the following linear model:
+
+Feature~i~ ~ α+β~1~ l~k~(below/above)+ε
+
+l~k~(below-above) being binarized according to the parcels around l~k~. 
+Covariates can be included in the modeling as follows:
+
+Feature~i~ ~ α+β~1~ l~k~(Low/High)+β~2~ Covariate~a~+...+β~x~ Covariate~x~+ε
+
+Type II sum of squares are calculated using the Anova function of the R car package.
+
+When analyzing the links between l and more than one feature, we recommend to estimate q-values for each l~k~ using Benjamini–Hochberg correction. 
+To assess the robustness and relevance of DE-SWAN results, we recommend to test multiple parcel widths and different p/q-values thresholds.
+
+
+## DEswan example
+
+See the vignette for examples

@@ -4,3 +4,6 @@
 ^\.Rproj\.user$
 ^README\.Rmd$
 ^README-.*\.png$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$

@@ -1,17 +1,17 @@
 #' Differential Expression - Sliding Window ANalysis (DE-SWAN)
 #'
 #' @param 
-#' data.df: a data Frame - columns are variables and rows are samples. Same order as qt and covariates
+#' data.df:	a data Frame - columns are variables and rows are samples (same order as qt and covariates)
 #' @param 
-#' qt: a Vector - quantitative trait for DE-SWAN. Same order as data.df and covariates
+#' qt:	a Vector - quantitative trait for DE-SWAN (same order as data.df and covariates)
 #' @param 
 #' window.center: an optional Vector - window centers. Default is quantile(qt,  probs = seq(.1,.9,.1))
 #' @param 
-#' buckets.size: an optional numeric - size of each bucket. Default is set to (max(range(qt))-min(range(qt)))/2
+#' buckets.size:	an optional Numeric - size of each bucket. Default is set to (max(range(qt))-min(range(qt)))/2
 #' @param 
-#' covariates: a Data Frame. Same order as qt and covariates
+#' covariates:	a data Frame. Columns are variables and rows are samples (same order as qt and covariates)
 #' @return
-#' list of 2 data.frames: $p  =  pvalues of qT and covariates for each variable and each window.center and $coefficients  =  coefficients of qT and covariates for each variable and each window.center
+#' list of 2 data Frames: $p  =  pvalues of qT and covariates for each variable and each window.center and $coefficients  =  coefficients of qT and covariates for each variable and each window.center
 #' @export
 #' @examples
 #' res.DEswan=DEswan(data.df = agingplasmaproteome[,-c(1:3)],

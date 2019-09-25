@@ -6,10 +6,15 @@
 #' thresholds: a Vector - p or q-values thresholds. Default is c(0.05,1e-2,1e-3,1e-4,1e-5)
 #' @export
 #' @examples
+#' res.DEswan=DEswan(data.df = agingplasmaproteome[,-c(1:3)],
+#' qt = agingplasmaproteome[,1],
+#' window.center = seq(40,100,10),
+#' buckets.size = 10,
+#' covariates = agingplasmaproteome[,c(2:3)])
+#' res.DEswan.wide.p=reshape.DEswan(res.DEswan,parameter = 1,factor = "qt")
 #' res.DEswan.wide.p.signif=nsignif.DEswan(res.DEswan.wide.p)
-#' 
-#' 
-#' 
+#' head(res.DEswan.wide.p.signif)
+
 
 nsignif.DEswan=function(res.DEswan.wide, thresholds){
   
