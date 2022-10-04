@@ -52,40 +52,46 @@ DEswan=function(data.df, qt, window.center, buckets.size, covariates){
   # reorder window.center and remove duplicates
   window.center=sort(unique(window.center))
   
-  for(k in 1:length(window.center)){
-    pvalues  <-  NULL
-    coefficients  <-  NULL
-    for(i in 1:ncol(data.df)){
-      qt.tmp  <-  rep(NA, length(qt))
-      qt.tmp[which(qt < window.center[k] & qt >= (window.center[k] - buckets.size))] <- 0
-      qt.tmp[which(qt > window.center[k] & qt <= (window.center[k] + buckets.size))] <- 1
-      qt.tmp  <-  factor(qt.tmp)
-      if(is.null(covariates) == T){
-        deswan.formula = "data.df[, i] ~ qt.tmp"  
-      }else{
-        deswan.formula  <-  paste(c("data.df[, i] ~ qt.tmp", paste("covariates$",colnames(covariates), collapse  =  " + ", sep = "")), collapse = " + ", sep = "")
+  output <- foreach(k = 1:length(window.center)) %dopar% {
+    pvalues <- NULL
+    coefficients <- NULL
+    for (i in 1:ncol(data.df)) {
+      qt.tmp <- rep(NA, length(qt))
+      qt.tmp[which(qt < window.center[k] & qt >= (window.center[k] - 
+        buckets.size))] <- 0
+      qt.tmp[which(qt > window.center[k] & qt <= (window.center[k] + 
+        buckets.size))] <- 1
+      qt.tmp <- factor(qt.tmp)
+      if (is.null(covariates) == T) {
+        deswan.formula = "data.df[, i] ~ qt.tmp"
       }
-      test.glm  <-  NULL
-      test.glm  <- try(glm.fit  <-  glm(as.formula(deswan.formula), family  =  gaussian), silent=TRUE)
-      if(class(test.glm)[1] !=  "try-error"){
-        glm.res  <-  car::Anova(glm.fit,  type  =  "2")
-        pvalues  <-  rbind(pvalues, data.frame(variable  =  colnames(data.df)[i], window.center  =  window.center[k], factor  =  rownames(glm.res), pvalue=glm.res$`Pr(>Chisq)`, stringsAsFactors  =  F))
-        coefficients  <- rbind(coefficients, data.frame(variable  =  colnames(data.df)[i], window.center  =  window.center[k], factor  = names(coefficients(glm.fit)), 
-                                                        coefficient=coefficients(glm.fit), stringsAsFactors  =  F))
+      else {
+        deswan.formula <- paste(c("data.df[, i] ~ qt.tmp", 
+          paste("covariates$", colnames(covariates), 
+            collapse = " + ", sep = "")), collapse = " + ", 
+          sep = "")
+      }
+      test.glm <- NULL
+      test.glm <- try(glm.fit <- glm(as.formula(deswan.formula), 
+        family = gaussian), silent = TRUE)
+      if (class(test.glm)[1] != "try-error") {
+        glm.res <- car::Anova(glm.fit, type = "2")
+        pvalues <- rbind(pvalues, data.frame(variable = colnames(data.df)[i], 
+          window.center = window.center[k], factor = rownames(glm.res), 
+          pvalue = glm.res$`Pr(>Chisq)`, stringsAsFactors = F))
+        coefficients <- rbind(coefficients, data.frame(variable = colnames(data.df)[i], 
+          window.center = window.center[k], factor = names(coefficients(glm.fit)), 
+          coefficient = coefficients(glm.fit), stringsAsFactors = F))
       }
     }
-    pvalues.tot  =  rbind(pvalues.tot, pvalues)
-    coefficients.tot  =  rbind(coefficients.tot, coefficients)
-    
-    print(paste("window.center  ", k, "/", length(window.center), sep = ""))
+    list(pvalues, coefficients)
   }
-  pvalues.tot$factor[which(pvalues.tot$factor=="qt.tmp")]<-"qt"
-  pvalues.tot$factor=gsub("^covariates\\$","",pvalues.tot$factor)
-  coefficients.tot$factor[which(coefficients.tot$factor=="qt.tmp1")]<-"qt"
-  coefficients.tot$factor=gsub("^covariates\\$","",coefficients.tot$factor)
-
-  
-  results  =  list(p  =  pvalues.tot, coeff  =  coefficients.tot)
+  concat <- lapply(purrr::transpose(output), function(l) do.call(rbind, 
+    l))
+  concat[[1]]$factor[which(concat[[1]]$factor == "qt.tmp")] <- "qt"
+  concat[[1]]$factor = gsub("^covariates\\$", "", concat[[1]]$factor)
+  concat[[2]]$factor[which(concat[[2]]$factor == "qt.tmp1")] <- "qt"
+  concat[[2]]$factor = gsub("^covariates\\$", "", concat[[2]]$factor)
+  results = list(p = concat[[1]], coeff = concat[[2]])
   return(results)
 }
-
